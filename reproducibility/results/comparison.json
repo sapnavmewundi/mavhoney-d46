@@ -1,0 +1,926 @@
+{
+  "summary": {
+    "passive": {
+      "total_trials": 700,
+      "gave_up_pct": 99.9,
+      "avg_commands_sent": 3.85,
+      "std_commands_sent": 1.21,
+      "ci_commands_sent": {
+        "mean": 3.8486,
+        "ci_lower": 3.7657,
+        "ci_upper": 3.9415,
+        "ci_level": 0.95
+      },
+      "avg_unique_commands": 3.05,
+      "std_unique_commands": 1.3,
+      "ci_unique_commands": {
+        "mean": 3.0543,
+        "ci_lower": 2.9586,
+        "ci_upper": 3.1514,
+        "ci_level": 0.95
+      },
+      "avg_states_reached": 1.0,
+      "std_states_reached": 0.0,
+      "ci_states_reached": {
+        "mean": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "ci_level": 0.95
+      },
+      "avg_intel_collected": 1.4,
+      "std_intel_collected": 0.59,
+      "ci_intel_collected": {
+        "mean": 1.4029,
+        "ci_lower": 1.36,
+        "ci_upper": 1.4457,
+        "ci_level": 0.95
+      },
+      "avg_response_diversity": 0.0,
+      "std_response_diversity": 0.0,
+      "ci_response_diversity": {
+        "mean": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "ci_level": 0.95
+      },
+      "avg_engagement_depth": 0.34,
+      "std_engagement_depth": 0.11,
+      "ci_engagement_depth": {
+        "mean": 0.3436,
+        "ci_lower": 0.3356,
+        "ci_upper": 0.3521,
+        "ci_level": 0.95
+      },
+      "avg_detection_latency": 9.65,
+      "std_detection_latency": 3.53,
+      "ci_detection_latency": {
+        "mean": 9.6543,
+        "ci_lower": 9.3999,
+        "ci_upper": 9.9016,
+        "ci_level": 0.95
+      },
+      "avg_deception_score": 16.99,
+      "std_deception_score": 4.43,
+      "ci_deception_score": {
+        "mean": 16.9949,
+        "ci_lower": 16.6855,
+        "ci_upper": 17.3308,
+        "ci_level": 0.95
+      }
+    },
+    "static": {
+      "total_trials": 700,
+      "gave_up_pct": 86.4,
+      "avg_commands_sent": 7.59,
+      "std_commands_sent": 2.02,
+      "ci_commands_sent": {
+        "mean": 7.5914,
+        "ci_lower": 7.4443,
+        "ci_upper": 7.7558,
+        "ci_level": 0.95
+      },
+      "avg_unique_commands": 5.44,
+      "std_unique_commands": 2.29,
+      "ci_unique_commands": {
+        "mean": 5.4443,
+        "ci_lower": 5.2628,
+        "ci_upper": 5.6214,
+        "ci_level": 0.95
+      },
+      "avg_states_reached": 1.0,
+      "std_states_reached": 0.0,
+      "ci_states_reached": {
+        "mean": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "ci_level": 0.95
+      },
+      "avg_intel_collected": 2.29,
+      "std_intel_collected": 0.93,
+      "ci_intel_collected": {
+        "mean": 2.29,
+        "ci_lower": 2.22,
+        "ci_upper": 2.3558,
+        "ci_level": 0.95
+      },
+      "avg_response_diversity": 1.0,
+      "std_response_diversity": 0.0,
+      "ci_response_diversity": {
+        "mean": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "ci_level": 0.95
+      },
+      "avg_engagement_depth": 0.67,
+      "std_engagement_depth": 0.17,
+      "ci_engagement_depth": {
+        "mean": 0.6733,
+        "ci_lower": 0.6614,
+        "ci_upper": 0.6865,
+        "ci_level": 0.95
+      },
+      "avg_detection_latency": 7.59,
+      "std_detection_latency": 3.63,
+      "ci_detection_latency": {
+        "mean": 7.5929,
+        "ci_lower": 7.3371,
+        "ci_upper": 7.8558,
+        "ci_level": 0.95
+      },
+      "avg_deception_score": 32.43,
+      "std_deception_score": 6.21,
+      "ci_deception_score": {
+        "mean": 32.4334,
+        "ci_lower": 32.0159,
+        "ci_upper": 32.9269,
+        "ci_level": 0.95
+      }
+    },
+    "conpot": {
+      "total_trials": 700,
+      "gave_up_pct": 95.9,
+      "avg_commands_sent": 5.62,
+      "std_commands_sent": 1.91,
+      "ci_commands_sent": {
+        "mean": 5.6157,
+        "ci_lower": 5.4771,
+        "ci_upper": 5.7529,
+        "ci_level": 0.95
+      },
+      "avg_unique_commands": 4.23,
+      "std_unique_commands": 1.87,
+      "ci_unique_commands": {
+        "mean": 4.2314,
+        "ci_lower": 4.087,
+        "ci_upper": 4.3686,
+        "ci_level": 0.95
+      },
+      "avg_states_reached": 1.0,
+      "std_states_reached": 0.0,
+      "ci_states_reached": {
+        "mean": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "ci_level": 0.95
+      },
+      "avg_intel_collected": 1.84,
+      "std_intel_collected": 0.78,
+      "ci_intel_collected": {
+        "mean": 1.8386,
+        "ci_lower": 1.78,
+        "ci_upper": 1.8971,
+        "ci_level": 0.95
+      },
+      "avg_response_diversity": 2.0,
+      "std_response_diversity": 0.0,
+      "ci_response_diversity": {
+        "mean": 2.0,
+        "ci_lower": 2.0,
+        "ci_upper": 2.0,
+        "ci_level": 0.95
+      },
+      "avg_engagement_depth": 0.5,
+      "std_engagement_depth": 0.17,
+      "ci_engagement_depth": {
+        "mean": 0.5007,
+        "ci_lower": 0.4882,
+        "ci_upper": 0.5132,
+        "ci_level": 0.95
+      },
+      "avg_detection_latency": 8.53,
+      "std_detection_latency": 3.87,
+      "ci_detection_latency": {
+        "mean": 8.5271,
+        "ci_lower": 8.2384,
+        "ci_upper": 8.8129,
+        "ci_level": 0.95
+      },
+      "avg_deception_score": 29.82,
+      "std_deception_score": 6.41,
+      "ci_deception_score": {
+        "mean": 29.8241,
+        "ci_lower": 29.3464,
+        "ci_upper": 30.296,
+        "ci_level": 0.95
+      }
+    },
+    "honeyplc": {
+      "total_trials": 700,
+      "gave_up_pct": 73.6,
+      "avg_commands_sent": 8.91,
+      "std_commands_sent": 1.88,
+      "ci_commands_sent": {
+        "mean": 8.9129,
+        "ci_lower": 8.7813,
+        "ci_upper": 9.0472,
+        "ci_level": 0.95
+      },
+      "avg_unique_commands": 6.17,
+      "std_unique_commands": 2.56,
+      "ci_unique_commands": {
+        "mean": 6.1743,
+        "ci_lower": 5.9756,
+        "ci_upper": 6.3672,
+        "ci_level": 0.95
+      },
+      "avg_states_reached": 1.0,
+      "std_states_reached": 0.0,
+      "ci_states_reached": {
+        "mean": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "ci_level": 0.95
+      },
+      "avg_intel_collected": 2.56,
+      "std_intel_collected": 1.05,
+      "ci_intel_collected": {
+        "mean": 2.5557,
+        "ci_lower": 2.4771,
+        "ci_upper": 2.63,
+        "ci_level": 0.95
+      },
+      "avg_response_diversity": 1.0,
+      "std_response_diversity": 0.0,
+      "ci_response_diversity": {
+        "mean": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "ci_level": 0.95
+      },
+      "avg_engagement_depth": 0.79,
+      "std_engagement_depth": 0.16,
+      "ci_engagement_depth": {
+        "mean": 0.7905,
+        "ci_lower": 0.7789,
+        "ci_upper": 0.8026,
+        "ci_level": 0.95
+      },
+      "avg_detection_latency": 7.14,
+      "std_detection_latency": 3.36,
+      "ci_detection_latency": {
+        "mean": 7.1429,
+        "ci_lower": 6.9042,
+        "ci_upper": 7.4058,
+        "ci_level": 0.95
+      },
+      "avg_deception_score": 36.54,
+      "std_deception_score": 5.95,
+      "ci_deception_score": {
+        "mean": 36.5378,
+        "ci_lower": 36.0997,
+        "ci_upper": 36.9859,
+        "ci_level": 0.95
+      }
+    },
+    "adaptive": {
+      "total_trials": 700,
+      "gave_up_pct": 0.0,
+      "avg_commands_sent": 11.29,
+      "std_commands_sent": 0.88,
+      "ci_commands_sent": {
+        "mean": 11.2857,
+        "ci_lower": 11.22,
+        "ci_upper": 11.3458,
+        "ci_level": 0.95
+      },
+      "avg_unique_commands": 7.0,
+      "std_unique_commands": 2.93,
+      "ci_unique_commands": {
+        "mean": 7.0,
+        "ci_lower": 6.7814,
+        "ci_upper": 7.1973,
+        "ci_level": 0.95
+      },
+      "avg_states_reached": 3.18,
+      "std_states_reached": 1.53,
+      "ci_states_reached": {
+        "mean": 3.1829,
+        "ci_lower": 3.07,
+        "ci_upper": 3.2844,
+        "ci_level": 0.95
+      },
+      "avg_intel_collected": 2.86,
+      "std_intel_collected": 1.25,
+      "ci_intel_collected": {
+        "mean": 2.8571,
+        "ci_lower": 2.76,
+        "ci_upper": 2.9372,
+        "ci_level": 0.95
+      },
+      "avg_response_diversity": 1.83,
+      "std_response_diversity": 0.77,
+      "ci_response_diversity": {
+        "mean": 1.8286,
+        "ci_lower": 1.7671,
+        "ci_upper": 1.8858,
+        "ci_level": 0.95
+      },
+      "avg_engagement_depth": 1.0,
+      "std_engagement_depth": 0.0,
+      "ci_engagement_depth": {
+        "mean": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "ci_level": 0.95
+      },
+      "avg_detection_latency": 7.14,
+      "std_detection_latency": 3.36,
+      "ci_detection_latency": {
+        "mean": 7.1429,
+        "ci_lower": 6.9042,
+        "ci_upper": 7.4058,
+        "ci_level": 0.95
+      },
+      "avg_deception_score": 54.25,
+      "std_deception_score": 9.75,
+      "ci_deception_score": {
+        "mean": 54.2472,
+        "ci_lower": 53.5079,
+        "ci_upper": 54.923,
+        "ci_level": 0.95
+      }
+    },
+    "improvements": {
+      "vs_passive": {
+        "commands_sent_pct": 193.2,
+        "unique_commands_pct": 129.5,
+        "states_reached_pct": 218.0,
+        "intel_collected_pct": 104.3,
+        "response_diversity_pct": Infinity,
+        "engagement_depth_pct": 194.1,
+        "detection_latency_pct": -26.0,
+        "deception_score_pct": 219.3
+      },
+      "vs_static": {
+        "commands_sent_pct": 48.7,
+        "unique_commands_pct": 28.7,
+        "states_reached_pct": 218.0,
+        "intel_collected_pct": 24.9,
+        "response_diversity_pct": 83.0,
+        "engagement_depth_pct": 49.3,
+        "detection_latency_pct": -5.9,
+        "deception_score_pct": 67.3
+      },
+      "vs_conpot": {
+        "commands_sent_pct": 100.9,
+        "unique_commands_pct": 65.5,
+        "states_reached_pct": 218.0,
+        "intel_collected_pct": 55.4,
+        "response_diversity_pct": -8.5,
+        "engagement_depth_pct": 100.0,
+        "detection_latency_pct": -16.3,
+        "deception_score_pct": 81.9
+      },
+      "vs_honeyplc": {
+        "commands_sent_pct": 26.7,
+        "unique_commands_pct": 13.5,
+        "states_reached_pct": 218.0,
+        "intel_collected_pct": 11.7,
+        "response_diversity_pct": 83.0,
+        "engagement_depth_pct": 26.6,
+        "detection_latency_pct": 0.0,
+        "deception_score_pct": 48.5
+      }
+    }
+  },
+  "statistical_tests": {
+    "adaptive_vs_passive": {
+      "commands_sent": {
+        "mann_whitney": {
+          "u_statistic": 489800.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 7.0072
+      },
+      "unique_commands": {
+        "mann_whitney": {
+          "u_statistic": 417900.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 1.7401
+      },
+      "states_reached": {
+        "mann_whitney": {
+          "u_statistic": 455000.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 2.0101
+      },
+      "intel_collected": {
+        "mann_whitney": {
+          "u_statistic": 411100.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 1.4932
+      },
+      "response_diversity": {
+        "mann_whitney": {
+          "u_statistic": 490000.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 3.3707
+      },
+      "engagement_depth": {
+        "mann_whitney": {
+          "u_statistic": 489650.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 8.1563
+      },
+      "detection_latency": {
+        "mann_whitney": {
+          "u_statistic": 167950.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": -0.7288
+      },
+      "deception_score": {
+        "mann_whitney": {
+          "u_statistic": 489900.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 4.916
+      }
+    },
+    "adaptive_vs_static": {
+      "commands_sent": {
+        "mann_whitney": {
+          "u_statistic": 451800.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 2.3689
+      },
+      "unique_commands": {
+        "mann_whitney": {
+          "u_statistic": 325150.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 0.5914
+      },
+      "states_reached": {
+        "mann_whitney": {
+          "u_statistic": 455000.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 2.0101
+      },
+      "intel_collected": {
+        "mann_whitney": {
+          "u_statistic": 308700.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 0.5152
+      },
+      "response_diversity": {
+        "mann_whitney": {
+          "u_statistic": 393400.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 1.5273
+      },
+      "engagement_depth": {
+        "mann_whitney": {
+          "u_statistic": 456750.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 2.6544
+      },
+      "detection_latency": {
+        "mann_whitney": {
+          "u_statistic": 232400.0,
+          "p_value": 0.085957,
+          "significant": false
+        },
+        "cohens_d": -0.1286
+      },
+      "deception_score": {
+        "mann_whitney": {
+          "u_statistic": 474850.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 2.6659
+      }
+    },
+    "adaptive_vs_conpot": {
+      "commands_sent": {
+        "mann_whitney": {
+          "u_statistic": 480250.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 3.8135
+      },
+      "unique_commands": {
+        "mann_whitney": {
+          "u_statistic": 375100.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 1.1269
+      },
+      "states_reached": {
+        "mann_whitney": {
+          "u_statistic": 455000.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 2.0101
+      },
+      "intel_collected": {
+        "mann_whitney": {
+          "u_statistic": 361100.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 0.9812
+      },
+      "response_diversity": {
+        "mann_whitney": {
+          "u_statistic": 203000.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": -0.316
+      },
+      "engagement_depth": {
+        "mann_whitney": {
+          "u_statistic": 479850.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 4.0384
+      },
+      "detection_latency": {
+        "mann_whitney": {
+          "u_statistic": 205900.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": -0.3817
+      },
+      "deception_score": {
+        "mann_whitney": {
+          "u_statistic": 480711.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 2.9576
+      }
+    },
+    "adaptive_vs_honeyplc": {
+      "commands_sent": {
+        "mann_whitney": {
+          "u_statistic": 412800.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 1.6159
+      },
+      "unique_commands": {
+        "mann_whitney": {
+          "u_statistic": 292050.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 0.3002
+      },
+      "states_reached": {
+        "mann_whitney": {
+          "u_statistic": 455000.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 2.0101
+      },
+      "intel_collected": {
+        "mann_whitney": {
+          "u_statistic": 277100.0,
+          "p_value": 1.1e-05,
+          "significant": true
+        },
+        "cohens_d": 0.2617
+      },
+      "response_diversity": {
+        "mann_whitney": {
+          "u_statistic": 393400.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 1.5273
+      },
+      "engagement_depth": {
+        "mann_whitney": {
+          "u_statistic": 425250.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 1.8859
+      },
+      "detection_latency": {
+        "mann_whitney": {
+          "u_statistic": 245000.0,
+          "p_value": 1.0,
+          "significant": false
+        },
+        "cohens_d": 0.0
+      },
+      "deception_score": {
+        "mann_whitney": {
+          "u_statistic": 458900.0,
+          "p_value": 0.0,
+          "significant": true
+        },
+        "cohens_d": 2.1907
+      }
+    }
+  },
+  "profile_breakdown": {
+    "hijack": {
+      "passive": {
+        "avg_commands": 3.8,
+        "avg_depth": 0.32,
+        "avg_deception": 15.9,
+        "gave_up_pct": 100.0
+      },
+      "static": {
+        "avg_commands": 7.9,
+        "avg_depth": 0.657,
+        "avg_deception": 32.3,
+        "gave_up_pct": 86.0
+      },
+      "conpot": {
+        "avg_commands": 5.9,
+        "avg_depth": 0.492,
+        "avg_deception": 29.6,
+        "gave_up_pct": 97.0
+      },
+      "honeyplc": {
+        "avg_commands": 9.7,
+        "avg_depth": 0.805,
+        "avg_deception": 37.5,
+        "gave_up_pct": 70.0
+      },
+      "adaptive": {
+        "avg_commands": 12.0,
+        "avg_depth": 1.0,
+        "avg_deception": 56.3,
+        "gave_up_pct": 0.0
+      }
+    },
+    "recon": {
+      "passive": {
+        "avg_commands": 3.7,
+        "avg_depth": 0.307,
+        "avg_deception": 15.0,
+        "gave_up_pct": 100.0
+      },
+      "static": {
+        "avg_commands": 8.2,
+        "avg_depth": 0.681,
+        "avg_deception": 29.8,
+        "gave_up_pct": 87.0
+      },
+      "conpot": {
+        "avg_commands": 5.5,
+        "avg_depth": 0.46,
+        "avg_deception": 26.7,
+        "gave_up_pct": 99.0
+      },
+      "honeyplc": {
+        "avg_commands": 9.0,
+        "avg_depth": 0.747,
+        "avg_deception": 31.8,
+        "gave_up_pct": 82.0
+      },
+      "adaptive": {
+        "avg_commands": 12.0,
+        "avg_depth": 1.0,
+        "avg_deception": 39.4,
+        "gave_up_pct": 0.0
+      }
+    },
+    "gps_spoof": {
+      "passive": {
+        "avg_commands": 4.0,
+        "avg_depth": 0.4,
+        "avg_deception": 20.0,
+        "gave_up_pct": 100.0
+      },
+      "static": {
+        "avg_commands": 7.1,
+        "avg_depth": 0.71,
+        "avg_deception": 32.9,
+        "gave_up_pct": 79.0
+      },
+      "conpot": {
+        "avg_commands": 5.5,
+        "avg_depth": 0.546,
+        "avg_deception": 31.5,
+        "gave_up_pct": 94.0
+      },
+      "honeyplc": {
+        "avg_commands": 8.0,
+        "avg_depth": 0.802,
+        "avg_deception": 35.7,
+        "gave_up_pct": 73.0
+      },
+      "adaptive": {
+        "avg_commands": 10.0,
+        "avg_depth": 1.0,
+        "avg_deception": 52.9,
+        "gave_up_pct": 0.0
+      }
+    },
+    "dos_flood": {
+      "passive": {
+        "avg_commands": 3.8,
+        "avg_depth": 0.318,
+        "avg_deception": 15.4,
+        "gave_up_pct": 100.0
+      },
+      "static": {
+        "avg_commands": 8.1,
+        "avg_depth": 0.673,
+        "avg_deception": 31.3,
+        "gave_up_pct": 87.0
+      },
+      "conpot": {
+        "avg_commands": 5.7,
+        "avg_depth": 0.477,
+        "avg_deception": 27.8,
+        "gave_up_pct": 97.0
+      },
+      "honeyplc": {
+        "avg_commands": 9.4,
+        "avg_depth": 0.785,
+        "avg_deception": 35.1,
+        "gave_up_pct": 71.0
+      },
+      "adaptive": {
+        "avg_commands": 12.0,
+        "avg_depth": 1.0,
+        "avg_deception": 45.2,
+        "gave_up_pct": 0.0
+      }
+    },
+    "mission_inject": {
+      "passive": {
+        "avg_commands": 3.9,
+        "avg_depth": 0.354,
+        "avg_deception": 18.1,
+        "gave_up_pct": 100.0
+      },
+      "static": {
+        "avg_commands": 7.1,
+        "avg_depth": 0.643,
+        "avg_deception": 33.6,
+        "gave_up_pct": 89.0
+      },
+      "conpot": {
+        "avg_commands": 5.7,
+        "avg_depth": 0.516,
+        "avg_deception": 32.3,
+        "gave_up_pct": 97.0
+      },
+      "honeyplc": {
+        "avg_commands": 9.2,
+        "avg_depth": 0.835,
+        "avg_deception": 40.3,
+        "gave_up_pct": 67.0
+      },
+      "adaptive": {
+        "avg_commands": 11.0,
+        "avg_depth": 1.0,
+        "avg_deception": 59.4,
+        "gave_up_pct": 0.0
+      }
+    },
+    "config_tamper": {
+      "passive": {
+        "avg_commands": 3.8,
+        "avg_depth": 0.383,
+        "avg_deception": 18.4,
+        "gave_up_pct": 99.0
+      },
+      "static": {
+        "avg_commands": 6.8,
+        "avg_depth": 0.678,
+        "avg_deception": 32.6,
+        "gave_up_pct": 87.0
+      },
+      "conpot": {
+        "avg_commands": 5.7,
+        "avg_depth": 0.572,
+        "avg_deception": 32.7,
+        "gave_up_pct": 89.0
+      },
+      "honeyplc": {
+        "avg_commands": 7.8,
+        "avg_depth": 0.785,
+        "avg_deception": 36.3,
+        "gave_up_pct": 79.0
+      },
+      "adaptive": {
+        "avg_commands": 10.0,
+        "avg_depth": 1.0,
+        "avg_deception": 54.4,
+        "gave_up_pct": 0.0
+      }
+    },
+    "kill_chain": {
+      "passive": {
+        "avg_commands": 3.9,
+        "avg_depth": 0.323,
+        "avg_deception": 16.2,
+        "gave_up_pct": 100.0
+      },
+      "static": {
+        "avg_commands": 8.1,
+        "avg_depth": 0.671,
+        "avg_deception": 34.6,
+        "gave_up_pct": 90.0
+      },
+      "conpot": {
+        "avg_commands": 5.3,
+        "avg_depth": 0.442,
+        "avg_deception": 28.1,
+        "gave_up_pct": 98.0
+      },
+      "honeyplc": {
+        "avg_commands": 9.3,
+        "avg_depth": 0.774,
+        "avg_deception": 39.1,
+        "gave_up_pct": 73.0
+      },
+      "adaptive": {
+        "avg_commands": 12.0,
+        "avg_depth": 1.0,
+        "avg_deception": 72.0,
+        "gave_up_pct": 0.0
+      }
+    }
+  },
+  "config": {
+    "num_trials": 100,
+    "attack_profiles": [
+      "hijack",
+      "recon",
+      "gps_spoof",
+      "dos_flood",
+      "mission_inject",
+      "config_tamper",
+      "kill_chain"
+    ],
+    "modes": [
+      "passive",
+      "static",
+      "conpot",
+      "honeyplc",
+      "adaptive"
+    ],
+    "deception_weights": {
+      "engagement": 30.0,
+      "response": 25.0,
+      "state": 25.0,
+      "intel": 20.0
+    },
+    "attacker_patience_model": {
+      "passive": {
+        "patience_start_frac": 0.2,
+        "abandon_rate": 0.55
+      },
+      "static": {
+        "patience_start_frac": 0.45,
+        "abandon_rate": 0.3
+      },
+      "conpot": {
+        "patience_start_frac": 0.3,
+        "abandon_rate": 0.38
+      },
+      "honeyplc": {
+        "patience_start_frac": 0.55,
+        "abandon_rate": 0.25
+      },
+      "adaptive": {
+        "patience_start_frac": 1.0,
+        "abandon_rate": 0.0
+      }
+    },
+    "generated_at": "2026-03-24T15:26:59.389021"
+  }
+}

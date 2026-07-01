@@ -1,0 +1,16 @@
+# Development dependencies — install with: pip install -r requirements-dev.txt
+-r requirements.txt
+
+# Testing
+pytest>=7.0
+pytest-cov>=4.0
+
+# Code quality
+black>=23.0
+flake8>=6.0
+mypy>=1.0
+
+# Validation
+pydantic>=2.0
+pydantic-settings>=2.0
+python-dotenv>=1.0

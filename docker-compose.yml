@@ -1,0 +1,140 @@
+version: "3.9"
+
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  MAVLink Honeypot — Hardened Docker Compose                 ║
+# ║                                                             ║
+# ║  Security posture:                                          ║
+# ║  • Host firewall blocks everything except MAVLink+dashboard ║
+# ║  • Docker daemon NOT exposed externally                     ║
+# ║  • No outbound internet from honeypot containers            ║
+# ║  • Dashboard on separate interface from MAVLink             ║
+# ║  • Models + logs mounted read-only where possible           ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+services:
+  # ── Honeypot Core (fully isolated) ──────────────────
+  honeypot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mavlink-honeypot
+    restart: unless-stopped
+    ports:
+      # BIND TO ATTACKER-FACING INTERFACE ONLY (e.g. eth0)
+      # Replace 0.0.0.0 with the public/attacker-facing IP
+      - "0.0.0.0:5760:5760" # MAVLink TCP — attacker-facing only
+    networks:
+      - honeypot_net # Internal only — zero outbound
+    environment:
+      - HONEYPOT_ENV=prod
+      - LOG_LEVEL=INFO
+    volumes:
+      - honeypot_logs:/app/logs # Writable: event logging
+      - honeypot_datasets:/app/datasets # Writable: dataset writes
+      - ml_models:/app/ml/models:ro # READ-ONLY: trained models
+    # Security: drop ALL capabilities, add only what's needed
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    # Security: read-only root filesystem
+    read_only: true
+    tmpfs:
+      - /tmp:size=50M,noexec,nosuid
+    # Security: no outbound — no DNS, no internet
+    dns: []
+    security_opt:
+      - no-new-privileges:true
+    # Security: resource limits to prevent DoS
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 512M
+        reservations:
+          cpus: "0.5"
+          memory: 128M
+
+  # ── Defender Dashboard (separate interface) ─────────
+  defender-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mavlink-defender
+    restart: unless-stopped
+    command: [ "python3", "dashboard/app.py" ]
+    ports:
+      # BIND TO ADMIN/MANAGEMENT INTERFACE ONLY (e.g. eth1, 127.0.0.1)
+      # Dashboard MUST NOT be on same interface as MAVLink
+      - "127.0.0.1:5000:5000" # Dashboard — admin interface only
+    networks:
+      - honeypot_net # Read honeypot logs
+      - dashboard_net # Minimal outbound for CDN fonts/JS
+    environment:
+      - HONEYPOT_ENV=prod
+      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY:?FLASK_SECRET_KEY must be set}
+      - TOTP_SECRET=${TOTP_SECRET:-}
+    volumes:
+      - honeypot_logs:/app/logs:ro # READ-ONLY: view logs only
+      - honeypot_datasets:/app/datasets:ro # READ-ONLY: view datasets
+      - ml_models:/app/ml/models:ro # READ-ONLY: model scores
+      - dashboard_config:/app/config # Writable: TOTP config
+    depends_on:
+      - honeypot
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp:size=50M,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 256M
+
+  # ── Attacker Dashboard (TESTING ONLY — disable in prod) ───
+  attacker-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mavlink-attacker
+    restart: unless-stopped
+    command: [ "python3", "attacker_dashboard/attacker_app.py" ]
+    ports:
+      # Same interface as MAVLink (attacker-facing)
+      - "0.0.0.0:9090:9090"
+    networks:
+      - honeypot_net # Internal only
+    environment:
+      - HONEYPOT_ENV=prod
+    depends_on:
+      - honeypot
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp:size=50M,noexec,nosuid
+    dns: []
+    security_opt:
+      - no-new-privileges:true
+    profiles:
+      - testing # Only starts with: docker compose --profile testing up
+
+networks:
+  # Honeypot network — strictly internal, zero internet
+  honeypot_net:
+    driver: bridge
+    internal: true # ← Critical: blocks ALL outbound traffic
+
+  # Dashboard network — minimal outbound (CDN only)
+  # Restrict further with iptables rules on the host
+  dashboard_net:
+    driver: bridge
+
+volumes:
+  honeypot_logs:
+  honeypot_datasets:
+  ml_models: # Trained ML models (mounted read-only)
+  dashboard_config:

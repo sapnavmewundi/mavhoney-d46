@@ -1,0 +1,10 @@
+MAVLink Honeypot — Performance Benchmark
+==================================================
+
+Parsing (N=10000):
+  Average Latency : 0.3 µs
+  P99 Latency     : 0.5 µs
+  Throughput      : 3,448,412 msgs/sec
+
+Full Pipeline (parse → analyze → FSM → respond):
+  Throughput      : 37 msgs/sec

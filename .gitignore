@@ -1,0 +1,46 @@
+# ─── Python ───
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ─── Virtual Environments ───
+venv/
+.venv/
+env/
+
+# ─── IDE ───
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ─── Project: Secrets & Config ───
+.env
+config/totp_secret.key
+config/.totp_configured
+
+# ─── Project: Runtime Data ───
+logs/
+datasets/
+threat_intel_exports/
+
+# ─── ML Artifacts ───
+ml/trained_model.pkl
+ml/*.pkl
+
+# ─── Reports ───
+*.html
+!templates/*.html
+!static/*.html
+
+# ─── Misc ───
+*.log
+*.csv
+core.*

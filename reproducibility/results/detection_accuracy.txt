@@ -1,0 +1,24 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.7, pytest-9.0.2, pluggy-1.6.0 -- /usr/local/bin/python3
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: /Users/apple/Downloads/mavlink_honeypot_fixed
+configfile: pyproject.toml
+plugins: hypothesis-6.151.6, cov-7.0.0
+collecting ... collected 13 items
+
+tests/test_detection_accuracy.py::TestReconDetection::test_all_recon_classified PASSED [  7%]
+tests/test_detection_accuracy.py::TestReconDetection::test_recon_low_severity PASSED [ 15%]
+tests/test_detection_accuracy.py::TestGPSSpoofDetection::test_all_gps_spoof_classified PASSED [ 23%]
+tests/test_detection_accuracy.py::TestGPSSpoofDetection::test_gps_spoof_high_severity PASSED [ 30%]
+tests/test_detection_accuracy.py::TestHijackDetection::test_all_hijack_classified PASSED [ 38%]
+tests/test_detection_accuracy.py::TestHijackDetection::test_hijack_high_severity PASSED [ 46%]
+tests/test_detection_accuracy.py::TestFalsePositiveRate::test_false_positive_rate_below_5_percent PASSED [ 53%]
+tests/test_detection_accuracy.py::TestPatternDetection::test_dos_flood_detected PASSED [ 61%]
+tests/test_detection_accuracy.py::TestPatternDetection::test_gps_spoof_pattern_detected PASSED [ 69%]
+tests/test_detection_accuracy.py::TestPatternDetection::test_hijack_sequence_detected PASSED [ 76%]
+tests/test_detection_accuracy.py::TestPatternDetection::test_recon_sweep_detected PASSED [ 84%]
+tests/test_detection_accuracy.py::TestPatternDetection::test_config_tampering_detected PASSED [ 92%]
+tests/test_detection_accuracy.py::TestPatternDetection::test_normal_heartbeat_no_pattern PASSED [100%]
+
+============================== 13 passed in 0.23s ==============================

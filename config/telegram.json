@@ -1,0 +1,11 @@
+{
+  "bot_token": "8432023873:AAFSuSZ2UYaxUoFoVorPQEeBebKxt67tTac",
+  "chat_id": "1773430558",
+  "_instructions": [
+    "1. Message @BotFather on Telegram to create a new bot",
+    "2. Copy the bot token and paste it above",
+    "3. Start a chat with your bot",
+    "4. Visit: https://api.telegram.org/bot<TOKEN>/getUpdates",
+    "5. Find your chat_id in the response and paste it above"
+  ]
+}

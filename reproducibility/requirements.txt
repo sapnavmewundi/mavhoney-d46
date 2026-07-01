@@ -1,0 +1,7 @@
+# Pinned dependencies for ML evaluation reproducibility
+# Install with: pip install -r reproducibility/requirements.txt
+
+numpy==1.26.4
+scipy==1.13.0
+scikit-learn==1.4.2
+pandas==2.2.1

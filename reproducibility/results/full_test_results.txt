@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.7, pytest-9.0.2, pluggy-1.6.0
+rootdir: /Users/apple/Downloads/mavlink_honeypot_fixed
+configfile: pyproject.toml
+plugins: hypothesis-6.151.6, cov-7.0.0
+collected 137 items
+
+tests/test_advanced_modules.py .......................                   [ 16%]
+tests/test_data_generator.py .......                                     [ 21%]
+tests/test_detection_accuracy.py .............                           [ 31%]
+tests/test_integration.py ..........                                     [ 38%]
+tests/test_property_based.py .........                                   [ 45%]
+tests/test_protocol.py ....................                              [ 59%]
+tests/test_response_generator.py ......................                  [ 75%]
+tests/test_security_gate.py .................                            [ 88%]
+tests/test_semantic_analysis.py ................                         [100%]
+
+============================= 137 passed in 5.93s ==============================

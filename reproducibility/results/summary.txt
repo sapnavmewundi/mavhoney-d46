@@ -1,0 +1,27 @@
+══════════════════════════════════════════════════════════════
+  MAVLink Honeypot — Experimental Results Summary
+══════════════════════════════════════════════════════════════
+
+1. TEST SUITE
+   ============================= 137 passed in 5.93s ==============================
+
+2. DETECTION ACCURACY
+   Passed: 13 | Failed: 0
+   RECON      : >95% accuracy
+   GPS_SPOOF  : >90% accuracy
+   HIJACK     : >90% accuracy
+   False Positive Rate: <5%
+
+3. PERFORMANCE
+   Average Latency : 0.3 µs
+   P99 Latency     : 0.5 µs
+   Throughput      : 3,448,412 msgs/sec
+   Throughput      : 37 msgs/sec
+
+4. COMPARISON STUDY
+   PASSIVE      : 4.0 cmds, 3.2 unique, 100.0% gave up
+   STATIC       : 7.6 cmds, 5.6 unique, 100.0% gave up
+   *ADAPTIVE*   : 11.4 cmds, 6.4 unique, 0.0% gave up
+
+   → Adaptive collects 50% more commands than static
+   → Adaptive collects 185% more commands than passive

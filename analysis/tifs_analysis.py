@@ -294,7 +294,7 @@ def main():
     us_conns = load_connections(f"{BASE}/datasets/us_connections.csv")
     india_adaptive = load_adaptive(f"{BASE}/datasets/adaptive_data.csv")
     india_fw = load_firewall(f"{BASE}/datasets/india/firewall_blocks.csv")
-    static_fw = load_firewall(f"{BASE}/datasets/europe/firewall_blocks.csv")
+    static_fw = load_firewall(f"{BASE}/datasets/static/firewall_blocks.csv")
     
     results = {}
     

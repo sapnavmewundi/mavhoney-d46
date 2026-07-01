@@ -148,7 +148,7 @@ def figure1_daily_connections():
     ax.plot(all_dates, us_values, color=COLORS['us'], linewidth=1.5,
             marker='s', markersize=3, label='US East (S2)', alpha=0.85)
     ax.plot(all_dates, europe_values, color=COLORS['europe'], linewidth=1.5,
-            marker='^', markersize=3, label='Europe (S3)', alpha=0.85)
+            marker='^', markersize=3, label='India Static (S3)', alpha=0.85)
 
     ax.set_xlabel('Date (2026)')
     ax.set_ylabel('Daily connections')
@@ -214,7 +214,7 @@ def figure2_intent_distribution():
                      color=COLORS['india'], alpha=0.85, edgecolor='white')
     bars2 = ax2.bar(x, us_counts, width, label='US East (S2)',
                      color=COLORS['us'], alpha=0.85, edgecolor='white')
-    bars3 = ax2.bar(x + width, europe_counts, width, label='Europe (S3)',
+    bars3 = ax2.bar(x + width, europe_counts, width, label='India Static (S3)',
                      color=COLORS['europe'], alpha=0.85, edgecolor='white')
 
     ax2.set_xticks(x)
@@ -296,7 +296,7 @@ def figure3_venn_diagram():
     v = venn3(
         subsets=(india_only, us_only, india_us,
                  europe_only, india_europe, us_europe, all_three),
-        set_labels=('India (S1)\n1,579 IPs', 'US East (S2)\n2,138 IPs', 'Europe (S3)\n2,074 IPs'),
+        set_labels=('India (S1)\n1,579 IPs', 'US East (S2)\n2,138 IPs', 'India Static (S3)\n2,074 IPs'),
         ax=ax
     )
 

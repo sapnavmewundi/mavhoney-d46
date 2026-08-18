@@ -1,345 +1,133 @@
-# 🍯 MAVLink Adaptive Honeypot with Real-Time Semantic Analysis
+# MAVHoney-D46
 
-![Tests](https://img.shields.io/badge/tests-164%20passed-brightgreen)
-![Coverage](https://img.shields.io/badge/core%20coverage-100%25-brightgreen)
-![Python](https://img.shields.io/badge/python-3.9%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-2.1.0-purple)
+**A 46-Day Multi-Sensor Dataset of Unsolicited Network Traffic Targeting MAVLink-Associated TCP Port 5760**
 
-## 🎯 Project Overview
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21769462.svg)](https://doi.org/10.5281/zenodo.21769462)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A research-grade drone security platform that combines:
-- **Adaptive MAVLink Honeypot** with state-based responses
-- **Real-Time Semantic Analysis** of attack intent
-- **Machine Learning Anomaly Detection** for novel attack patterns
-- **GeoIP Profiling** with distance estimation
-- **Live Web Dashboard** with real-time visualizations
-- **Automated Dataset Generation** for ML/research
-- **Reproducibility Package** for experimental validation
+## Overview
 
-### 🔬 Research Novelty
+MAVHoney-D46 is, to the best of our knowledge, the first publicly available dataset capturing real-world unsolicited network activity on MAVLink-associated TCP port 5760. The dataset was collected over 46 days (April 16 – May 31, 2026) using three geographically distributed passive listeners deployed on DigitalOcean infrastructure in India (two sensors) and the United States (one sensor).
 
-**Core Innovation**: Real-time semantic understanding of MAVLink commands with adaptive behavioral responses.
-
-Traditional honeypots passively log traffic. This system:
-1. **Understands** what each MAVLink command means (RECON, HIJACK, GPS_SPOOF, etc.)
-2. **Adapts** its behavior based on attack severity (NORMAL → WEAK → CONFUSED → DEFENSIVE → CRASHED)
-3. **Profiles** attackers with geographic and behavioral signatures
-4. **Generates** publication-ready datasets automatically
-
----
-
-## 📊 Experimental Results
-
-### Detection Accuracy
-
-| Attack Type | Accuracy | False Positive Rate |
-|-------------|----------|-------------------|
-| RECON       | >95%     | <5%               |
-| GPS_SPOOF   | >90%     | <5%               |
-| HIJACK      | >90%     | <5%               |
-| DoS Flood   | >90%     | <5%               |
-
-### Engagement Metrics
-
-| Honeypot Type       | Avg Commands | Unique Cmds | Gave Up |
-|---------------------|-------------|-------------|---------|
-| Passive             | 4.0         | 3.2         | 100%    |
-| Static              | 7.6         | 5.6         | 100%    |
-| **Adaptive (Ours)** | **11.4**    | **6.4**     | **0%**  |
-
-**→ 185% improvement** over passive, **50% improvement** over static honeypots.
-
-### Performance
+## Dataset Summary (v1.1.0)
 
 | Metric | Value |
 |--------|-------|
-| Parsing Throughput | 3,400,000+ msgs/sec |
-| Parsing Latency | 0.3µs average, 0.5µs P99 |
+| Collection period | 46 days (Apr 16 – May 31, 2026) |
+| Sensors | 3 (India ×2, US ×1) |
+| Total sessions | 33,207 |
+| Classified sessions | 19,771 |
+| Unclassified | 13,436 |
+| MAVLink-valid sessions | 369 |
+| Unique source IPs | 4,330 |
+| Protocol | TCP 100% (UDP 0%) |
 
-*See `reproducibility/` to reproduce all results.*
+### Intent Classification
 
----
+| Label | Sessions | Description |
+|-------|----------|-------------|
+| SCANNER | 19,402 (98.1%) | Generic automated port scans |
+| UNKNOWN | 337 (1.7%) | MAVLink-valid, unclassified intent |
+| RECON | 27 (0.1%) | MAVLink-aware passive probes (HEARTBEAT) |
+| CONTROL | 5 (0.03%) | Active command attempts |
 
-## 📂 Project Structure
+## Repository Structure
 
 ```
-mavlink_honeypot/
-├── honeypot/                       # Core honeypot engine
-│   ├── mavlink_honeypot.py        # Orchestrator (~440 lines)
-│   ├── core/                      # Modular core pipeline
-│   │   ├── protocol.py            # MAVLink v1/v2 parsing + crafting
-│   │   ├── semantic_analyzer.py   # Intent classification + patterns
-│   │   ├── state_machine.py       # 7-state FSM + telemetry drift
-│   │   ├── response_generator.py  # State-aware adaptive responses
-│   │   └── session_manager.py     # Data classes + CSV/JSON logging
-│   ├── fingerprint.py             # Attacker fingerprinting
-│   ├── deception_engine.py        # Deception scoring
-│   └── [advanced modules...]      # Canary, MITRE, tarpit, etc.
-├── ml/                            # Machine learning
-│   ├── anomaly_detector.py        # IsolationForest anomaly detection
-│   ├── skill_classifier.py        # Attacker skill classification
-│   ├── FEATURES.md                # Feature engineering docs
-│   └── MODEL_REGISTRY.md          # Model version tracking
-├── tests/                         # 164 tests (100% core coverage)
-│   ├── test_protocol.py           # Parsing + crafting tests
-│   ├── test_response_generator.py # FSM + response tests
-│   ├── test_property_based.py     # Hypothesis invariant tests
-│   ├── test_detection_accuracy.py # Classification accuracy
-│   ├── test_integration.py        # End-to-end pipeline
-│   └── test_data_generator.py     # Synthetic data generation
-├── reproducibility/               # Reproducibility package
-│   ├── run_experiments.sh         # Run all experiments (~2 min)
-│   ├── datasets/                  # Generated datasets
-│   └── results/                   # Experiment outputs
-├── benchmarks/                    # Performance + comparison
-│   ├── performance_test.py        # Throughput/latency
-│   └── comparison_study.py        # Adaptive vs static vs passive
-├── dashboard/                     # Web dashboard
-├── docs/                          # Documentation
-│   └── architecture.md            # Mermaid architecture diagrams
-├── CHANGELOG.md                   # Version history
-├── CONTRIBUTING.md                # Contributor guide
-└── .pre-commit-config.yaml        # Code quality hooks
+mavhoney-d46/
+├── dataset/
+│   ├── india/          # Server S1 (Bengaluru)
+│   │   ├── connections.csv
+│   │   ├── adaptive_data.csv
+│   │   └── honeypot.log
+│   ├── us/             # Server S2 (New York)
+│   │   ├── connections.csv
+│   │   ├── adaptive_data.csv
+│   │   └── honeypot.log
+│   ├── static/         # Server S3 (Bengaluru)
+│   │   ├── connections.csv
+│   │   ├── adaptive_data.csv
+│   │   └── honeypot.log
+│   └── checksums.sha256
+├── master_pipeline.py       # Generates all figures and statistics
+├── reproduce_statistics.py  # Reproduces all summary counts
+├── dataset_paper/
+│   ├── figures/             # All manuscript figures
+│   └── generate_figures.py
+└── README.md
 ```
 
----
+## Quick Start
 
-## 🚀 Quick Start
-
+### Verify checksums
 ```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Start the honeypot
-python -m honeypot.mavlink_honeypot
-
-# Start the dashboard (separate terminal)
-cd dashboard && python3 app.py
-
-# Simulate attacks (separate terminal)
-python3 attack_simulator_fixed.py all
-
-# Access dashboard
-open http://localhost:8080
+cd dataset && sha256sum -c checksums.sha256
 ```
 
----
-
-## 🔬 Reproducibility
-
-Reproduce all experimental results in ~2 minutes:
-
+### Reproduce all statistics
 ```bash
-bash reproducibility/run_experiments.sh
+python reproduce_statistics.py
 ```
 
-This generates:
-- Synthetic attack dataset (1200 events, 6 profiles)
-- Detection accuracy validation (13 tests)
-- Full test suite (164 tests)
-- Performance benchmarks (throughput, latency)
-- Comparison study (adaptive vs static vs passive)
-
-Results are saved to `reproducibility/results/summary.txt`.
-
----
-
-## 🧠 Semantic Analysis Engine
-
-### MAVLink Command Classification
-
-The system classifies each MAVLink message by **intent**:
-
-| Message ID | Command | Intent | Severity |
-|------------|---------|--------|----------|
-| 0 | HEARTBEAT | RECON | 1 |
-| 20-21 | PARAM_REQUEST | RECON | 2 |
-| 23 | PARAM_SET | CONFIG_ATTACK | 7 |
-| 76 | COMMAND_LONG | CONTROL | 6 |
-| 84, 86 | SET_POSITION | HIJACK | 9 |
-| 113, 132 | GPS_INPUT | GPS_SPOOF | 10 |
-| 400 | ARM_DISARM | CONTROL | 8 |
-
-### Attack Pattern Detection
-
-Real-time detection of:
-- **DoS Floods**: >50 messages in 5 seconds
-- **GPS Spoofing**: GPS_INPUT/HIL_GPS messages
-- **Hijack Sequences**: ARM → COMMAND → POSITION
-- **Reconnaissance Sweeps**: Repeated PARAM requests
-
----
-
-## 🔄 Adaptive Behavior States
-
-The honeypot dynamically switches between **7 states** based on attack severity:
-
-```
-NORMAL (Severity 1-4)
-  ↓
-WEAK (Severity 5-6)        → Delayed responses
-  ↓
-CONFUSED (Severity 7)      → Invalid/conflicting data
-  ↓
-PARTIAL (Severity 8)       → Intermittent responses
-  ↓
-DEFENSIVE (Severity 9)     → Fake errors, appear disarmed
-  ↓
-REBOOTING (Severity 10)    → Temporarily offline
-  ↓
-CRASHED                    → No response (appear offline)
-```
-
----
-
-## 🌍 GeoIP & Attacker Profiling
-
-### Geographic Analysis
-
-For each attacker, the system determines:
-- **Country, City, Region**
-- **ISP/Organization**
-- **Distance from honeypot** (Haversine formula)
-- **RTT-based latency** (network delay measurement)
-
-### Behavioral Signature
-
-Each attacker gets:
-- **Threat Level**: CRITICAL / HIGH / MEDIUM / LOW
-- **Command Sequence Pattern**: Last 10 commands
-- **Behavior Signature**: MD5 hash of command pattern
-- **Attack Type Distribution**: % RECON vs HIJACK vs DOS
-
----
-
-## 💾 Dataset Generation
-
-### Output Formats
-
-**Basic Attack Dataset** (`attack_dataset_*.csv`):
-```csv
-timestamp, ip, port, msg_id, msg_name, intent, severity,
-payload_hex, session_id, honeypot_state, packet_rate
-```
-
-**Synthetic Reproducibility Dataset** (`reproducibility/datasets/synthetic_attacks.csv`):
-```csv
-timestamp, attacker_ip, msg_id, msg_name, intent, severity,
-honeypot_state, packet_rate, attack_profile
-```
-
-### Using Datasets for Research
-
-```python
-import pandas as pd
-
-# Load attack data
-df = pd.read_csv('datasets/attack_dataset_20260206.csv')
-
-# Analyze attack distribution
-print(df['intent'].value_counts())
-
-# Filter high-severity events
-critical = df[df['severity'] >= 8]
-```
-
----
-
-## 🧪 Testing
-
-### Run Tests
-
+### Generate all figures
 ```bash
-# Full test suite (164 tests)
-python3 -m pytest tests/ -v
-
-# With coverage report
-python3 -m pytest tests/ --cov=honeypot --cov-report=html
-
-# Property-based tests only
-python3 -m pytest tests/test_property_based.py -v
-
-# Detection accuracy only
-python3 -m pytest tests/test_detection_accuracy.py -v
+python master_pipeline.py
 ```
 
-### Test Coverage
+## File Schemas
 
-| Module | Coverage |
-|--------|----------|
-| `honeypot/core/protocol.py` | 100% |
-| `honeypot/core/response_generator.py` | 100% |
-| `honeypot/core/session_manager.py` | 100% |
-| `honeypot/core/state_machine.py` | 100% |
-| `honeypot/core/semantic_analyzer.py` | 91% |
+### connections.csv
+| Column | Type | Description |
+|--------|------|-------------|
+| timestamp | ISO-8601 | Connection time (UTC, NTP-synced) |
+| event_type | String | CONNECT or DISCONNECT |
+| source_ip | String | Masked A.B.x.x format |
+| source_port | Integer | Ephemeral source port |
+| duration | Float | Session duration (seconds) |
+| packet_count | Integer | Application-layer MAVLink packets |
+| intent | String | SCANNER/UNKNOWN/RECON/CONTROL |
+| source_id | String | HMAC-SHA256 pseudonym (stable across servers/days) |
 
----
+### adaptive_data.csv
+| Column | Type | Description |
+|--------|------|-------------|
+| timestamp | ISO-8601 | Packet receive time (UTC) |
+| source_ip | String | Masked A.B.x.x format |
+| msg_name | String | Decoded MAVLink message type |
+| severity | Integer | Composite severity score (0–10) |
+| intent | String | Session-level intent classification |
+| source_id | String | HMAC-SHA256 pseudonym |
 
-## 🛡️ Security Considerations
+## Data Availability
 
-**⚠️ WARNING**: This is a honeypot — it intentionally attracts attackers.
+- **Zenodo (archival)**: [10.5281/zenodo.21769462](https://doi.org/10.5281/zenodo.21769462)
+- **GitHub (code + mirror)**: This repository
 
-1. **Isolated Network**: Run on isolated/monitored network
-2. **No Real Drones**: Never connect to actual drone systems
-3. **Rate Limiting**: Built-in DoS protection (100 msgs/5s, auto-blocklist)
-4. **Session Isolation**: Per-connection sandboxing
-5. **Privacy**: GeoIP data may have privacy implications
+## Citation
 
----
-
-## 📈 Performance
-
-| Metric | Value |
-|--------|-------|
-| Parsing throughput | 3,400,000+ msgs/sec |
-| Parsing latency (avg) | 0.3 µs |
-| Parsing latency (P99) | 0.5 µs |
-| Concurrent connections | ~100 |
-| Memory | ~200-500 MB |
-| Disk usage | ~1 MB/hour |
-
----
-
-## 📚 References
-
-### MAVLink Protocol
-- [MAVLink Developer Guide](https://mavlink.io/en/)
-- [MAVLink Message Definitions](https://mavlink.io/en/messages/common.html)
-
-### Research
-- "Honeypot Architectures for IoT Systems"
-- "Drone Security: Attack Detection and Prevention"
-- "Adaptive Deception in Cyber Defense"
-
----
-
-## 🤝 Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, code style, and PR process.
-
----
-
-## 📄 License
-
-MIT License — For research and educational purposes.
-
----
-
-## 🎓 Citation
-
-If you use this in research, please cite:
+If you use this dataset, please cite:
 
 ```bibtex
-@software{mavlink_honeypot_2026,
-  title   = {MAVLink Adaptive Honeypot with Real-Time Semantic Analysis},
-  author  = {Research Team},
-  year    = {2026},
-  version = {2.1.0},
-  url     = {https://github.com/your-repo/mavlink-honeypot}
+@misc{mavhoney_d46_dataset,
+  author       = {Mewundi, Sapna Vikram and Chowdary, Medaramitla Prajwal and Honnavalli, Prasad B.},
+  title        = {{MAVHoney-D46: A 46-Day Multi-Sensor Dataset of Unsolicited
+                   Network Traffic Targeting MAVLink-Associated Port 5760}},
+  month        = jul,
+  year         = 2026,
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.21769462},
+  url          = {https://doi.org/10.5281/zenodo.21769462}
 }
 ```
 
----
+## License
 
-**Built with ❤️ for drone security research**
+- **Dataset**: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- **Code**: [MIT License](LICENSE)
+
+## Authors
+
+- Sapna Vikram Mewundi — PES University, Bengaluru
+- Medaramitla Prajwal Chowdary — PES University, Bengaluru
+- Prasad B. Honnavalli — PES University, Bengaluru

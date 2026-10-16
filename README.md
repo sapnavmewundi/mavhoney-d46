@@ -2,7 +2,7 @@
 
 **A 46-Day Multi-Sensor Dataset of Network Traffic to an Active Low-Interaction MAVLink Deception Honeypot on Port 5760**
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21769462.svg)](https://doi.org/10.5281/zenodo.21769462)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23416383.svg)](https://doi.org/10.5281/zenodo.23416383)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -160,7 +160,7 @@ cp .env.example .env
 
 ## Data Availability
 
-- **Zenodo (Archival Dataset & Code)**: [10.5281/zenodo.21769462](https://doi.org/10.5281/zenodo.21769462)
+- **Zenodo (Archival Dataset & Code — v1.3.0)**: [10.5281/zenodo.23416383](https://doi.org/10.5281/zenodo.23416383) (concept DOI: [10.5281/zenodo.21769461](https://doi.org/10.5281/zenodo.21769461))
 - **GitHub**: [https://github.com/sapnavmewundi/mavhoney-d46](https://github.com/sapnavmewundi/mavhoney-d46)
 
 ## Citation
@@ -174,8 +174,8 @@ If you use this dataset or codebase, please cite:
   month        = oct,
   year         = 2026,
   publisher    = {Zenodo},
-  doi          = {10.5281/zenodo.21769462},
-  url          = {https://doi.org/10.5281/zenodo.21769462}
+  doi          = {10.5281/zenodo.23416383},
+  url          = {https://doi.org/10.5281/zenodo.23416383}
 }
 ```
 

@@ -140,23 +140,33 @@ cp .env.example .env
 | Column | Type | Description |
 |--------|------|-------------|
 | `timestamp` | ISO-8601 | Connection event time (UTC, NTP-synced) |
-| `event_type` | String | `CONNECT` or `DISCONNECT` |
-| `source_ip` | String | Masked `A.B.x.x` format |
-| `source_port` | Integer | Ephemeral source port |
-| `duration` | Float | Session duration in seconds |
-| `packet_count` | Integer | Application-layer MAVLink packets received |
-| `intent` | String | Session-level intent (`SCANNER`, `RECON`, `CONTROL`) |
+| `ip` | String | Masked `A.B.x.x` client IP address |
 | `source_id` | String | Keyed HMAC-SHA256 pseudonym (stable across sensors/days) |
+| `port` | Integer | Ephemeral source port |
+| `session_id` | String | Unique 8-hex session identifier |
+| `event_type` | String | `CONNECT` or `DISCONNECT` |
+| `packets` | Integer | Application-layer MAVLink packets received |
+| `duration_sec` | Float | Session duration in seconds |
 
 ### `adaptive_data.csv`
 | Column | Type | Description |
 |--------|------|-------------|
 | `timestamp` | ISO-8601 | Packet receive time (UTC) |
-| `source_ip` | String | Masked `A.B.x.x` format |
-| `msg_name` | String | Decoded MAVLink message type (e.g. `HEARTBEAT`, `PING`) |
-| `msg_id` | Integer | MAVLink message ID |
-| `intent` | String | Classification label |
+| `ip` | String | Masked `A.B.x.x` client IP address |
 | `source_id` | String | Keyed HMAC-SHA256 pseudonym |
+| `port` | Integer | Ephemeral source port |
+| `msg_id` | Integer | MAVLink message ID (e.g. 0 for `HEARTBEAT`, 24 for `GPS_RAW_INT`) |
+| `msg_name` | String | Decoded MAVLink message name (or `NON_MAVLINK_PROBE`) |
+| `intent` | String | Classification label (`SCANNER`, `RECON`, `CONTROL`) |
+| `payload_hex` | String | Raw packet payload in hexadecimal |
+| `session_id` | String | Unique 8-hex session identifier linking to `connections.csv` |
+| `honeypot_state` | String | Honeypot state machine phase (e.g. `NORMAL`, `AUTH_DECOY`) |
+| `packet_rate` | Float | Received packet arrival rate (packets/sec) |
+
+### Auxiliary Files
+- `honeypot.log`: Collector event logs with all IP addresses sanitized to `A.B.x.x`.
+- `firewall_blocks.csv`: Firewall log schema (`timestamp,ip,port,protocol,action`), retained header-only for schema compatibility.
+- `ssh_bruteforce.csv`: SSH daemon log schema (`timestamp,ip,port,username,password,success`), retained header-only for schema compatibility.
 
 ## Data Availability
 

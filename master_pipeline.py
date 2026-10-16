@@ -24,14 +24,18 @@ from datetime import datetime, timedelta
 # CONFIGURATION
 # ═══════════════════════════════════════════════════════════════
 CUTOFF = "2026-05-31T23:59:59.999999"
-SRC = "/Users/apple/mavlink_honeypot/attack_data/2026-06-08"
-HMAC_KEY = b"mavhoney-d46-2026-pes-university"
+SRC = os.environ.get("MAVHONEY_SRC", "./raw")
+# SECRET: not distributed. Provide via MAVHONEY_HMAC_KEY to derive source_id.
+_KEY = os.environ.get("MAVHONEY_HMAC_KEY")
+HMAC_KEY = _KEY.encode() if _KEY else None
 SERVERS = ["india", "us", "static"]
 SERVER_LABELS = {"india": "S1 (India)", "us": "S2 (US East)", "static": "S3 (India Static)"}
-FIG_DIR = "/Users/apple/mavlink_honeypot/dataset_paper/figures"
+FIG_DIR = os.environ.get("MAVHONEY_FIG_DIR", "./figures")
 PRIORITY = {"CONTROL": 4, "RECON": 3, "UNKNOWN": 2, "SCANNER": 1}
 
 def make_source_id(ip):
+    if HMAC_KEY is None:
+        raise RuntimeError("Set MAVHONEY_HMAC_KEY (secret) to derive source_id.")
     return hmac.new(HMAC_KEY, ip.encode(), hashlib.sha256).hexdigest()[:16]
 
 print("=" * 70)

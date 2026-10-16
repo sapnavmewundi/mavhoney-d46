@@ -32,19 +32,38 @@ Because of this active posture, MAVLink-aware traffic in this dataset is largely
 | Unique source IPs | 4,330 |
 | Protocol | TCP 100% (UDP 0%) |
 
-### Intent Classification
+### Intent Classification: Session-Level vs. Packet/Row-Level
 
-Intent classification is deterministic and protocol-observable (Table 3 in manuscript). MAVLink v2 trailing-zero truncation is applied to all frames.
+The dataset captures 33,207 total TCP sessions (recorded in `connections.csv`) and 19,824 decoded application-layer event rows (recorded in `adaptive_data.csv`). Because a single session may exchange multiple packets, classification metrics exist at both **packet/row level** and **session level**:
 
-| Label | Sessions | Description |
-|-------|----------|-------------|
-| **SCANNER** | 19,399 (98.1%) | Non-MAVLink generic automated port scans and probes |
-| **RECON** | 363 (1.8%) | Valid MAVLink telemetry and PING probes (dominated by 205 sources with constant `seq=1337` tool signature) |
-| **CONTROL** | 5 (0.03%) | Active command attempts (e.g., `COMMAND_LONG`, `SET_MODE`) |
-| **UNKNOWN** | 0 (0.0%) | Zero unclassified framed traffic (re-identified via v2 truncation) |
-| *(unlabeled)* | 13,440 | Sessions that connected and disconnected with no application bytes |
+#### 1. Packet/Row-Level Distribution (`adaptive_data.csv`)
+Counts of individual decoded message rows across all sessions (matches Section 2 of `reproduce_statistics.py`):
 
-### Session-Level Reconciliation
+| Label | Rows (Packets) | Percentage | Description |
+|-------|----------------|------------|-------------|
+| **SCANNER** | 19,399 | 97.9% | Generic non-MAVLink probes (`NON_MAVLINK_PROBE`) |
+| **RECON** | 397 | 2.0% | Valid MAVLink telemetry & PING probes (`HEARTBEAT`, `PARAM_*`, etc.) |
+| **CONTROL** | 21 | 0.1% | Valid MAVLink command messages (`COMMAND_LONG`, `SET_MODE`, etc.) |
+| **UNKNOWN** | 7 | <0.1% | Framed packets failing message-definition validation (`MALFORMED_*`) |
+| **Total** | **19,824** | **100.0%** | All decoded application-layer records |
+
+#### 2. Session-Level Intent Classification (`connections.csv`)
+Sessions inherit the highest-priority intent of their constituent packets using the hierarchy: `CONTROL` (4) > `RECON` (3) > `UNKNOWN` (2) > `SCANNER` (1).
+
+> **Why UNKNOWN = 0 at the session level**: The 7 `UNKNOWN` (`MALFORMED_*`) packet rows occurred within 2 multi-packet sessions (session IDs `52ebde96` and `982ed531`) that also transmitted valid `RECON` telemetry. Under the priority hierarchy, both sessions resolve to `RECON`, leaving exactly 0 sessions whose dominant classification is `UNKNOWN`.
+
+| Label | Sessions | Percentage | Description |
+|-------|----------|------------|-------------|
+| **SCANNER** | 19,399 | 98.1% of classified | Non-MAVLink generic automated port scans and probes |
+| **RECON** | 363 | 1.8% of classified | MAVLink-aware telemetry and PING probes (205 sources with `seq=1337`) |
+| **CONTROL** | 5 | 0.03% of classified | Active command attempts (e.g., `COMMAND_LONG`, `SET_MODE`) |
+| **UNKNOWN** | 0 | 0.0% of classified | Zero sessions dominated by malformed traffic |
+| **Classified Total** | **19,767** | **100.0%** | Sessions with decoded application content |
+| *(unlabeled)* | 13,440 | — | Sessions that connected and disconnected with no application bytes |
+| **Total Sessions** | **33,207** | — | Total TCP sessions across all 3 sensors |
+
+#### 3. Session-Level Reconciliation Matrix
+Cross-tabulation of payload categories and session-level labels (matches Section 6 of `reproduce_statistics.py` and Table 5 in the manuscript):
 
 | Category | SCANNER | UNKNOWN | RECON | CONTROL | (unlabeled) | Total |
 |----------|---------|---------|-------|---------|-------------|-------|

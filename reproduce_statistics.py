@@ -4,7 +4,7 @@ reproduce_statistics.py — Reproduce all statistics reported in the MAVHoney-D4
 manuscript from the released dataset files.
 
 Usage:
-    python3 reproduce_statistics.py /path/to/dataset
+    python3 reproduce_statistics.py [/path/to/dataset]
 
 The dataset directory should contain subdirectories: india/, us/, static/
 Each with: connections.csv, adaptive_data.csv, honeypot.log
@@ -15,11 +15,14 @@ import os
 from collections import Counter, defaultdict
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python3 reproduce_statistics.py /path/to/dataset")
-        sys.exit(1)
+    if len(sys.argv) >= 2:
+        base = sys.argv[1]
+    else:
+        base = os.environ.get("MAVHONEY_DATASET", "./dataset")
+        if not os.path.exists(base):
+            print("Usage: python3 reproduce_statistics.py [/path/to/dataset]")
+            sys.exit(1)
     
-    base = sys.argv[1]
     servers = ['india', 'us', 'static']
     
     print("=" * 60)
@@ -163,7 +166,42 @@ def main():
             total_log += lines
             print(f"  {server}: {lines:,} lines")
     print(f"  Total: {total_log:,}")
-    
+
+    # ── 6. Session-level reconciliation (payload category × intent) ──
+    print("\n6. SESSION-LEVEL RECONCILIATION (payload category × label)")
+    conn_sessions = set()
+    for server in servers:
+        path = os.path.join(base, server, "connections.csv")
+        if not os.path.exists(path):
+            continue
+        with open(path) as f:
+            for row in csv.DictReader(f):
+                conn_sessions.add(row.get('session_id', ''))
+    # sessions with an adaptive row and whether MAVLink-valid
+    empty_sessions = conn_sessions - set(session_intents.keys())
+    cats = {'no_app_bytes': Counter(), 'non_mavlink': Counter(), 'valid_mavlink': Counter()}
+    for sid in conn_sessions:
+        if sid not in session_intents:
+            cats['no_app_bytes']['(unlabeled)'] += 1
+        elif sid in mavlink_sessions:
+            cats['valid_mavlink'][session_intents[sid]] += 1
+        else:
+            cats['non_mavlink'][session_intents[sid]] += 1
+    labels = ['SCANNER', 'UNKNOWN', 'RECON', 'CONTROL', '(unlabeled)']
+    header = f"  {'category':14}" + "".join(f"{l:>12}" for l in labels) + f"{'total':>8}"
+    print(header)
+    for c in ('no_app_bytes', 'non_mavlink', 'valid_mavlink'):
+        row = cats[c]
+        print(f"  {c:14}" + "".join(f"{row.get(l,0):>12,}" for l in labels)
+              + f"{sum(row.values()):>8,}")
+    print(f"\n  Sessions with NO application-layer bytes (direct count): "
+          f"{len(empty_sessions):,}")
+    print(f"  (equals total sessions {len(conn_sessions):,} minus classified "
+          f"{len(session_intents):,}; counted directly, not by subtraction)")
+    orphans = set(session_intents.keys()) - conn_sessions
+    print(f"  Orphan adaptive sessions not in connections.csv: {len(orphans):,} "
+          f"(expected 0 in v1.2)")
+
     # ── Summary ──
     print("\n" + "=" * 60)
     print("SUMMARY")

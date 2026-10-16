@@ -68,11 +68,9 @@ for server in SERVERS:
     with open(path) as f:
         reader = csv.DictReader(f)
         for row in reader:
-            if row['timestamp'] > CUTOFF:
-                continue
             rows += 1
             ip = row['ip']
-            sid = make_source_id(ip)
+            sid = row['source_id'] if ('source_id' in row and row['source_id']) else make_source_id(ip)
             ips.add(ip)
             sids.add(sid)
             date = row['timestamp'][:10]
@@ -349,36 +347,43 @@ if HAS_MPL:
     
     # ── Figure 2: Intent Distribution ──
     print("Generating Figure 2: Intent distribution...")
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5))
     
     # Donut chart
     labels_d = ['SCANNER', 'UNKNOWN', 'RECON', 'CONTROL']
     sizes = [session_intent_counts[l] for l in labels_d]
     colors_d = ['#3498db', '#f39c12', '#e74c3c', '#9b59b6']
-    wedges, texts, autotexts = ax1.pie(sizes, labels=labels_d, colors=colors_d,
-                                        autopct='%1.1f%%', startangle=90,
-                                        pctdistance=0.75, textprops={'fontsize': 10})
-    centre_circle = plt.Circle((0, 0), 0.50, fc='white')
+    
+    # Clean donut chart without overlapping zero/micro slices
+    wedges, _ = ax1.pie(sizes, colors=colors_d, startangle=90)
+    centre_circle = plt.Circle((0, 0), 0.55, fc='white')
     ax1.add_artist(centre_circle)
-    ax1.set_title(f'(a) Overall Distribution\n({total_classified_sessions:,} sessions)',
+    ax1.set_title(f'(a) Overall Distribution\n({total_classified_sessions:,} classified sessions)',
                   fontsize=11, fontweight='bold')
+    
+    # Clean side legend with counts and percentages
+    legend_labels = [f'{l}: {c:,} ({c/sum(sizes)*100:.2f}%)' if c > 0 else f'{l}: 0 (0.00%)' 
+                     for l, c in zip(labels_d, sizes)]
+    ax1.legend(wedges, legend_labels, loc="center left", bbox_to_anchor=(0.85, 0.5),
+               fontsize=9, frameon=True, edgecolor='#cccccc')
     
     # Per-server bar chart (log scale)
     x = np.arange(len(labels_d))
     width = 0.25
     for i, server in enumerate(SERVERS):
         vals = [per_server_session_intent[server].get(l, 0) for l in labels_d]
-        # Replace 0 with 0.1 for log scale
-        vals_plot = [max(v, 0.1) for v in vals]
+        # Do not draw fake bars for 0; pass np.nan so matplotlib omits them cleanly
+        vals_plot = [float(v) if v > 0 else np.nan for v in vals]
         ax2.bar(x + i * width, vals_plot, width, label=SERVER_LABELS[server],
                 color=list(colors.values())[i])
     
     ax2.set_yscale('log')
+    ax2.set_ylim(bottom=0.8, top=35000)
     ax2.set_xticks(x + width)
     ax2.set_xticklabels(labels_d, fontsize=10)
     ax2.set_ylabel('Sessions (log scale)', fontsize=11)
     ax2.set_title('(b) Per-Server Breakdown', fontsize=11, fontweight='bold')
-    ax2.legend(fontsize=9)
+    ax2.legend(fontsize=9, loc='upper right')
     ax2.grid(True, alpha=0.3, axis='y')
     
     plt.tight_layout()
@@ -527,7 +532,7 @@ if HAS_MPL:
              C_RAW, fs=12)
     
     draw_arrow(5, 13.35, 5, 12.45)
-    draw_note(7.5, 12.9, 'Session grouping by\n(server, source_ip, port, seq)\n+ CONNECT/DISCONNECT pairing')
+    draw_note(7.5, 12.9, 'Connection filtering:\n46,128 raw connection opens\n− 12,921 health/self-tests\n= 33,207 external sessions')
     
     # Level 2: Connection rows
     draw_box(5, 11.7, 5.2, 1.2,
@@ -536,8 +541,7 @@ if HAS_MPL:
              C_CSV, fs=12)
     
     draw_arrow(5, 11.05, 5, 10.15)
-    draw_note(7.5, 10.6, f'Deduplication: each session counted once\n'
-              f'2×{total_sessions_count:,} − {interrupted:,} interrupted = {total_conn_rows:,}')
+    draw_note(7.5, 10.6, f'Event pairing & interruption:\n2 × 33,207 sessions − 47 interrupted\n= {total_conn_rows:,} connection rows')
     
     # Level 3: Deduplicated sessions
     draw_box(5, 9.4, 5.2, 1.2,

@@ -96,7 +96,17 @@ class TelegramNotifier:
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
     def _load_config(self):
-        """Load Telegram config from file."""
+        """Load Telegram config from environment variables or config file."""
+        # Check environment variables first
+        env_token = os.environ.get("TELEGRAM_BOT_TOKEN")
+        env_chat = os.environ.get("TELEGRAM_CHAT_ID")
+        if env_token and env_chat and env_token not in ("YOUR_BOT_TOKEN_HERE", "YOUR_TELEGRAM_BOT_TOKEN_HERE"):
+            self.bot_token = env_token
+            self.chat_id = str(env_chat)
+            self.enabled = True
+            print(f"✅ Telegram notifications enabled via environment (chat: {self.chat_id})")
+            return
+
         if not os.path.exists(CONFIG_PATH):
             self._create_template()
             return
@@ -105,13 +115,13 @@ class TelegramNotifier:
             with open(CONFIG_PATH, 'r') as f:
                 config = json.load(f)
             self.bot_token = config.get("bot_token", "")
-            self.chat_id = config.get("chat_id", "")
+            self.chat_id = str(config.get("chat_id", ""))
             self.enabled = bool(self.bot_token and self.chat_id
-                                and self.bot_token != "YOUR_BOT_TOKEN_HERE")
+                                and self.bot_token not in ("YOUR_BOT_TOKEN_HERE", "YOUR_TELEGRAM_BOT_TOKEN_HERE"))
             if self.enabled:
                 print(f"✅ Telegram notifications enabled (chat: {self.chat_id})")
             else:
-                print("ℹ️  Telegram not configured (edit config/telegram.json)")
+                print("ℹ️  Telegram not configured (set TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID or edit config/telegram.json)")
         except Exception:
             self.enabled = False
 

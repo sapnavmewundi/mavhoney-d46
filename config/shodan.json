@@ -1,6 +1,6 @@
 {
-  "api_key": "H9nYVNp5kuXQGRo0X8ebGx1qq1r2ARgV",
-  "plan": "dev_academic",
-  "scan_credits": 100,
-  "query_credits": 100
+  "api_key": "YOUR_SHODAN_API_KEY_HERE",
+  "plan": "oss",
+  "scan_credits": 0,
+  "query_credits": 0
 }

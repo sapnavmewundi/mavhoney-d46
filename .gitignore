@@ -23,6 +23,8 @@ env/
 
 # ─── Project: Secrets & Config ───
 .env
+.env.*
+!.env.example
 config/totp_secret.key
 config/.totp_configured
 

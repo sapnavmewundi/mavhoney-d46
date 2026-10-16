@@ -160,8 +160,10 @@ cp .env.example .env
 
 ## Data Availability
 
-- **Zenodo (Archival Dataset & Code — v1.3.0)**: [10.5281/zenodo.23416383](https://doi.org/10.5281/zenodo.23416383) (concept DOI: [10.5281/zenodo.21769461](https://doi.org/10.5281/zenodo.21769461))
-- **GitHub**: [https://github.com/sapnavmewundi/mavhoney-d46](https://github.com/sapnavmewundi/mavhoney-d46)
+- **Zenodo Archival Record (v1.3.0)**: [10.5281/zenodo.23416383](https://doi.org/10.5281/zenodo.23416383)
+  - **Concept DOI (resolves to latest version)**: [10.5281/zenodo.21769461](https://doi.org/10.5281/zenodo.21769461)
+  - **Archival Version History**: v1.0.0 (`10.5281/zenodo.21769462`), v1.1.0 (`10.5281/zenodo.21990129`), v1.3.0 (`10.5281/zenodo.23416383`)
+- **GitHub Repository**: [https://github.com/sapnavmewundi/mavhoney-d46](https://github.com/sapnavmewundi/mavhoney-d46)
 
 ## Citation
 

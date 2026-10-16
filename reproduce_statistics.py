@@ -200,7 +200,7 @@ def main():
           f"{len(session_intents):,}; counted directly, not by subtraction)")
     orphans = set(session_intents.keys()) - conn_sessions
     print(f"  Orphan adaptive sessions not in connections.csv: {len(orphans):,} "
-          f"(expected 0 in v1.2)")
+          f"(expected 0 in v1.3)")
 
     # ── Summary ──
     print("\n" + "=" * 60)

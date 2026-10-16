@@ -29,8 +29,8 @@ plt.rcParams.update({
     'savefig.pad_inches': 0.05,
 })
 
-BASE = "/Users/apple/mavlink_honeypot"
-FIG_DIR = f"{BASE}/paper/figures"
+BASE = os.environ.get("MAVHONEY_BASE", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+FIG_DIR = os.environ.get("MAVHONEY_FIG_DIR", os.path.join(BASE, "paper", "figures"))
 os.makedirs(FIG_DIR, exist_ok=True)
 
 # ══════════════════════════════════════════════════════════════

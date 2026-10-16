@@ -6,11 +6,12 @@ Generates: bootstrap CIs, Mann-Whitney U tests, stability analysis
 import json
 import random
 import math
+import os
 from itertools import combinations
 
 random.seed(42)
 
-BASE = "/Users/apple/mavlink_honeypot"
+BASE = os.environ.get("MAVHONEY_BASE", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 def load_ablation():
     with open(f"{BASE}/reproducibility/results/ablation_study.json") as f:

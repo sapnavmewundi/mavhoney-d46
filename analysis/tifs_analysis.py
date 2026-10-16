@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 
 random.seed(42)
 
-BASE = "/Users/apple/mavlink_honeypot"
+BASE = os.environ.get("MAVHONEY_BASE", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 EXCLUDE_IPS = {"223.31.218.223", "152.57.179.137"}
 
 # ── Load Data ──────────────────────────────────────────────

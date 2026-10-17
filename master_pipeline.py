@@ -24,7 +24,7 @@ from datetime import datetime, timedelta
 # CONFIGURATION
 # ═══════════════════════════════════════════════════════════════
 CUTOFF = "2026-05-31T23:59:59.999999"
-SRC = os.environ.get("MAVHONEY_SRC", "./raw")
+SRC = os.environ.get("MAVHONEY_SRC", "./dataset" if os.path.exists("./dataset") else "./raw")
 # SECRET: not distributed. Provide via MAVHONEY_HMAC_KEY to derive source_id.
 _KEY = os.environ.get("MAVHONEY_HMAC_KEY")
 HMAC_KEY = _KEY.encode() if _KEY else None
@@ -466,16 +466,15 @@ if HAS_MPL:
                       color=intent_colors[intent], label=intent, edgecolors='none')
     
     ax.set_xlabel('Session Duration (seconds)', fontsize=11)
-    ax.set_ylabel('Packet Count', fontsize=11)
+    ax.set_ylabel('Parsed MAVLink Packets', fontsize=11)
     ax.set_title('Session Duration vs Packet Count by Intent Class', fontsize=13, fontweight='bold')
     ax.set_xscale('log')
     ax.set_yscale('log')
     ax.legend(fontsize=10)
     ax.grid(True, alpha=0.3)
     
-    # Add annotation for zero-application-data connections (NOT "SYN-only"!)
-    zero_data = sum(1 for s in all_sessions.values() if s['packets'] == 0)
-    ax.annotate(f'{zero_data:,} zero-application-data\nconnections (packets=0)',
+    # Add annotation for SCANNER sessions on packets=0 line
+    ax.annotate('19,399 SCANNER sessions\n(0 parsed MAVLink packets;\nnon-MAVLink payload)',
                 xy=(0.02, 0.98), xycoords='axes fraction', fontsize=9,
                 ha='left', va='top',
                 bbox=dict(boxstyle='round,pad=0.3', facecolor='lightyellow', alpha=0.8))
@@ -556,13 +555,13 @@ if HAS_MPL:
     # Level 4: Adaptive data
     draw_box(5, 7.1, 5.2, 1.2,
              f'{total_adapt_rows:,}  Adaptive Data Rows',
-             f'Packet-level MAVLink decode events',
+             f'Decoded protocol-event records',
              C_PKT, fs=12)
     
     draw_arrow(5, 6.45, 5, 5.55)
     draw_note(7.5, 6.0, f'Session-level intent assignment\n'
               f'(highest priority per session)\n'
-              f'{total_adapt_rows - total_classified_sessions} multi-packet sessions collapsed')
+              f'16 multi-event sessions ({total_adapt_rows - total_classified_sessions} extra rows collapsed)')
     
     # Level 5: Classified sessions
     draw_box(5, 4.8, 5.2, 1.2,

@@ -45,4 +45,5 @@ ml/*.pkl
 # ─── Misc ───
 *.log
 *.csv
+!source_cohorts.csv
 core.*

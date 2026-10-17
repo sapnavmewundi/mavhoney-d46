@@ -549,8 +549,8 @@ if HAS_MPL:
              C_SESSION, fs=12)
     
     draw_arrow(5, 8.75, 5, 7.85)
-    draw_note(7.5, 8.3, f'{unclassified:,} sessions with no application\n'
-              f'data (zero-application-data connections)')
+    draw_note(7.5, 8.3, f'{unclassified:,} sessions lacking an adaptive\n'
+              f'event record (unlabeled)')
     
     # Level 4: Adaptive data
     draw_box(5, 7.1, 5.2, 1.2,
@@ -576,7 +576,7 @@ if HAS_MPL:
     summary = (f'Sessions: {total_sessions_count:,}\n'
                f'Classified: {total_classified_sessions:,}\n'
                f'MAVLink-valid: {total_mavlink:,}\n'
-               f'Unclassified: {unclassified:,}')
+               f'Unlabeled: {unclassified:,}')
     ax.text(5, 2.5, summary, ha='center', va='center', fontsize=10,
             bbox=dict(boxstyle='round,pad=0.5', facecolor='#eaf2f8', edgecolor='#2980b9'))
     

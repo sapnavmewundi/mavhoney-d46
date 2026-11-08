@@ -251,7 +251,7 @@ def main():
     print(f"  Connection rows: {total_rows:,}")
     print(f"  Adaptive rows:   {total_adapt:,}")
     print(f"  Classified:      {len(session_intents):,}")
-    print(f"  Unclassified:    {total_sessions - len(session_intents):,}")
+    print(f"  Unlabeled:        {total_sessions - len(session_intents):,}")
     print(f"  MAVLink-valid:   {len(mavlink_sessions):,}")
     print(f"  Log entries:     {total_log:,}")
 

@@ -216,7 +216,7 @@ ADAPTIVE DATA
   Total adaptive rows:       {total_adapt_rows:,}
   Unique classified sessions:{total_classified_sessions:,}
   Multi-row sessions:        {total_adapt_rows - total_classified_sessions:,}
-  Unclassified:              {unclassified:,}
+  Unlabeled:                  {unclassified:,}
 
 SESSION-LEVEL INTENT (for Table 5):""")
 
@@ -474,7 +474,7 @@ if HAS_MPL:
     ax.grid(True, alpha=0.3)
     
     # Add annotation for SCANNER sessions on packets=0 line
-    ax.annotate('19,399 SCANNER sessions\n(0 parsed MAVLink packets;\nnon-MAVLink payload)',
+    ax.annotate('19,399 SCANNER sessions\n(0 parsed MAVLink packets;\n12,479 with wire bytes,\n6,920 bare TCP)',
                 xy=(0.02, 0.98), xycoords='axes fraction', fontsize=9,
                 ha='left', va='top',
                 bbox=dict(boxstyle='round,pad=0.3', facecolor='lightyellow', alpha=0.8))
